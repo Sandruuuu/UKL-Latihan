@@ -1,3 +1,43 @@
+## Penjelasan
+![App Screenshot](https://github.com/Sandruuuu/UKL-Latihan/blob/master/Screenshot%20from%202025-11-04%2008-18-37.png?raw=true)
+
+Oke, jadi ini adalah endpoint yang saya gunakan untuk proses login (POST /api/auth/login). Saya mengirimkan username dan password saya, dan saya berhasil!
+Seperti yang terlihat di screenshot, testing ini sukses karena statusnya 201 Created dan pesannya 'Login berhasil'. Ini berarti server menerima dan memverifikasi data saya.
+MD5 & Token: Secara spesifik, saya menggunakan semacam hashing (mungkin MD5 atau sejenisnya) di backend untuk mencocokkan kata sandi dengan aman. Begitu verifikasi ini lulus, server langsung memberikan saya JSON Web Token (JWT) yang panjang itu.
+
+![App Screenshot](https://github.com/Sandruuuu/UKL-Latihan/blob/master/Screenshot%20from%202025-11-04%2008-39-41.png?raw=true)
+
+Saya menggunakan metode POST ke endpoint /api/users. Ini adalah standar untuk membuat data baru. Begitu saya mengirimkan detail pengguna baru (seperti nama, username, dan password), server langsung merespons dengan 201 Created dan pesan 'Pengguna berhasil ditambahkan'. Ini artinya user baru, yaitu 'Hendrik Guguk' dengan username 'Zyroo', sudah sukses tersimpan ke database saya.
+
+![App Screenshot](https://github.com/Sandruuuu/UKL-Latihan/blob/master/Screenshot%20from%202025-11-04%2009-14-52.png?raw=true)
+
+Di permintaan ini, saya mengirimkan data baru—seperti mengubah username pengguna tersebut. Seperti yang terlihat, testing saya berhasil dengan respons 200 OK dan pesan 'Pengguna berhasil diperbarui'. Data yang dikembalikan server menunjukkan bahwa username pengguna dengan ID 2 sudah sukses berubah menjadi 'Bazing'.
+
+Ini penting karena membuktikan bahwa pengguna bisa mengubah data mereka sendiri (seperti mengganti nama atau username). Dan yang terpenting, password hash tetap muncul di respons, ini memastikan bahwa server tetap tidak pernah menampilkan kata sandi asli, bahkan setelah ada pembaruan data. Jadi, fungsi update ini sudah aman dan berjalan dengan baik.
+
+![App Screenshot](https://github.com/Sandruuuu/UKL-Latihan/blob/master/Screenshot%20from%202025-11-04%2010-00-38.png?raw=true)
+
+Saya menggunakan metode GET ke endpoint localhost:3000/api/users/1. Angka /1 di sini berarti saya secara spesifik ingin mengambil data pengguna yang memiliki ID = 1. Karena ini adalah data rahasia, saya pasti sudah menyertakan Token JWT yang saya dapat saat login di header permintaan (Authorization).
+
+![App Screenshot](https://github.com/Sandruuuu/UKL-Latihan/blob/master/Screenshot%20from%202025-11-04%2010-32-49.png?raw=true)
+
+Jadi saya disini menggunakan method POST untuk mencatat kehadiran para siswa by id. Mencatat kehadiran siswa tentu nya memakai json dengan membuat date,time,dan status (hadir/alpa/izin) untuk semua siswa yang tersimpan ke dalam data presensi  Jadi seperti bisa dilihat sudah working dan juga ini membuktikan bahwa kode saya berjalan dengan lancar.
+
+![App Screenshot](https://github.com/Sandruuuu/UKL-Latihan/blob/master/Screenshot%20from%202025-11-04%2011-07-38.png?raw=true)
+
+Untuk yang disini simpel saja saya membuat history untuk para kehadiran dari pada id siswa dengan begitu semua pembuatan kehadiran di post akan tersimpan di dalam history para id_siswa, dan juga kode sudah berjalan dengan sangat baik.
+
+![App Screenshot](https://github.com/Sandruuuu/UKL-Latihan/blob/master/Screenshot%20from%202025-11-04%2011-19-52.png?raw=true)
+
+Saya menggunakan metode GET ke endpoint spesifik, yaitu /api/attendance/summary/1. Angka /1 di sini berarti saya meminta ringkasan kehadiran untuk Siswa dengan ID = 1. Seperti biasa, header saya pasti sudah terisi Token JWT untuk otorisasi. Respon yang saya dapat adalah 200 OK, dan datanya sangat informatif: Saya mendapatkan ringkasan kehadiran untuk user_id: 1 di bulan 11-2025, dengan detail seperti: Hadir: 1, Izin: 0, Sakit: 0, Alpha: 0. Ini membuktikan bahwa sistem saya tidak hanya mencatat data, tapi juga bisa mengolah dan menyajikan laporan ringkasan bulanan secara real-time
+
+![App Screenshot](https://github.com/Sandruuuu/UKL-Latihan/blob/master/Screenshot%20from%202025-11-04%2011-39-48.png?raw=true)
+
+Saya menggunakan metode POST ke endpoint /api/attendance/analysis, dan ini penting: Alasan saya menggunakan POST (bukan GET) adalah karena saya mengirimkan parameter filter di body JSON. Di situ, saya menentukan rentang waktu yang spesifik, misalnya dari start_date: 2025-10-11 sampai end_date: 2026-12-10, untuk mengecek data kehadiran siswa.
+
+Responnya sukses (201 Created) dan memberikan hasil insight yang dalam: Saya mendapatkan analisis kelompok (grouped_analysis) untuk rentang waktu yang saya minta, menunjukkan total persentase kehadiran, izin, sakit, dan alpha di seluruh sistem. Misalnya, terlihat hadir_percentage: 50 dan alpa_percentage: 50
+
+## Project setup
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
